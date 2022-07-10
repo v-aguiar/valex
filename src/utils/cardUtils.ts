@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 
 import cryptr from "../config/cryptr.js";
 
+import { Card } from "../repositories/cardRepository.js";
+
 const cardUtils = {
   generateCardNumber: () => {
     return faker.finance.creditCardNumber("################");
@@ -11,6 +13,10 @@ const cardUtils = {
   generateCardCVV: () => {
     const cvv = faker.finance.creditCardCVV();
     return cryptr.encrypt(cvv);
+  },
+
+  hashPassword: (password: string) => {
+    return cryptr.encrypt(password);
   },
 
   generateExpirationDate: () => {
@@ -38,6 +44,24 @@ const cardUtils = {
         return middleName.length > 3 ? firstLetter : "";
       })
       .join("");
+  },
+
+  checkCardExpiration: (card: Card) => {
+    if (dayjs().isBefore(dayjs(card.expirationDate))) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ This card is expired...",
+      };
+    }
+  },
+
+  checkSecurityCode: (securityCode: string, hashedSecurityCode: string) => {
+    if (cryptr.decrypt(securityCode) !== cryptr.decrypt(hashedSecurityCode)) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Invalid security code (CVV)!",
+      };
+    }
   },
 };
 

@@ -41,6 +41,36 @@ const cardServices = {
 
     await cardRepository.insert(newCardData);
   },
+
+  activateCard: async (cardId: number, password: string, securityCode: string) => {
+    const card: cardRepository.Card = await cardRepository.findById(cardId);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given ID!",
+      };
+    }
+
+    if (card.password !== null) {
+      throw {
+        name: "badRequest",
+        message: "⚠ This card is already activated!",
+      };
+    }
+
+    cardUtils.checkSecurityCode(securityCode, card.securityCode);
+    cardUtils.checkCardExpiration(card);
+
+    const hashedPassword = cardUtils.hashPassword(password);
+
+    const activateCardData = {
+      isBlocked: false,
+      password: hashedPassword,
+      originalCardId: cardId,
+    };
+
+    await cardRepository.update(cardId, activateCardData);
+  },
 };
 
 export default cardServices;

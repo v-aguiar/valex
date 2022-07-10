@@ -21,6 +21,16 @@ export default function errorHandlerMiddleware(
     res.status(409).send(error.message);
   }
 
+  if (error.name === "unauthorized") {
+    console.error({ error: error.message });
+    res.status(401).send(error.message);
+  }
+
+  if (error.name === "badRequest") {
+    console.error({ error: error.message });
+    res.status(400).send(error.message);
+  }
+
   console.error(error);
   res.status(500).send(error.message);
 }
