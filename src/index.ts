@@ -1,4 +1,5 @@
 ﻿import express, { json } from "express";
+import "express-async-errors";
 
 import dotenv from "dotenv";
 import chalk from "chalk";
@@ -6,8 +7,6 @@ import cors from "cors";
 
 import errorHandlerMiddleware from "./middlewares/errorHandlerMiddleware.js";
 import router from "./routes/router.js";
-
-import "express-async-errors";
 
 const server = express();
 
