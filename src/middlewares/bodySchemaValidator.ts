@@ -2,7 +2,7 @@
 import { Schema } from "joi";
 
 export default function bodySchemaValidator(schema: Schema) {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     const { error } = schema.validate(req.body);
     if (error) {
       throw {

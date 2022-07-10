@@ -1,8 +1,13 @@
 ﻿import { Request, Response } from "express";
 
-export async function create(req: Request, res: Response) {
-  const { employeeId, cardType } = req.body;
-  const { apiKey } = req.headers;
+import cardServices from "../services/cardServices.js";
 
-  console.log("headers: ", req.headers);
+export async function create(req: Request, res: Response) {
+  // TODO -> Pra que serve essa apiKey msm?
+  const { apiKey } = req.headers;
+  const { employeeId, cardType } = req.body;
+
+  await cardServices.createCard(employeeId, cardType);
+
+  res.sendStatus(200);
 }

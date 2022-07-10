@@ -11,5 +11,16 @@ export default function errorHandlerMiddleware(
     res.status(422).send(error.message);
   }
 
-  res.status(500).send("⚠ We're sorry, it appears that something went wrong...");
+  if (error.name === "notFound") {
+    console.error({ error: error.message });
+    res.status(404).send(error.message);
+  }
+
+  if (error.name === "alreadyExists") {
+    console.error({ error: error.message });
+    res.status(409).send(error.message);
+  }
+
+  console.error(error);
+  res.status(500).send(error.message);
 }

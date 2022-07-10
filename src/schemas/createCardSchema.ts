@@ -6,7 +6,7 @@ const createCardSchema = Joi.object({
     "number.required": "⚠ employeeId is required",
   }),
   cardType: Joi.string()
-    .equal(["groceries", "restaurants", "transport", "education", "health"])
+    .equal("groceries", "restaurant", "transport", "education", "health")
     .required()
     .messages({
       "string.equal":
