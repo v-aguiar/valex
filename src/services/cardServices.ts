@@ -1,5 +1,7 @@
 ﻿import * as employeeRepository from "../repositories/employeeRepository.js";
 import * as cardRepository from "../repositories/cardRepository.js";
+import * as paymentRepository from "../repositories/paymentRepository.js";
+import * as rechargeRepository from "../repositories/rechargeRepository.js";
 
 import { TransactionTypes } from "../repositories/cardRepository.js";
 
@@ -70,6 +72,34 @@ const cardServices = {
     };
 
     await cardRepository.update(cardId, activateCardData);
+  },
+
+  getCardStatement: async (cardId: number) => {
+    const card: cardRepository.Card = await cardRepository.findById(cardId);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given ID!",
+      };
+    }
+
+    if (card.isBlocked) {
+      throw {
+        name: "badRequest",
+        message: "⚠ This card is blocked!",
+      };
+    }
+
+    const transactions = await paymentRepository.findByCardId(cardId);
+    const recharges = await rechargeRepository.findByCardId(cardId);
+    const balance = cardUtils.getCardBalance(transactions, recharges);
+
+    const statement = {
+      balance,
+      transactions,
+      recharges,
+    };
+    return statement;
   },
 };
 

@@ -19,3 +19,11 @@ export async function activate(req: Request, res: Response) {
 
   res.sendStatus(200);
 }
+
+export async function getStatement(req: Request, res: Response) {
+  const { cardId } = req.params;
+
+  const statement = await cardServices.getCardStatement(parseInt(cardId));
+
+  res.send(statement);
+}

@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 import cryptr from "../config/cryptr.js";
 
 import { Card } from "../repositories/cardRepository.js";
+import { PaymentWithBusinessName } from "../repositories/paymentRepository.js";
+import { Recharge } from "../repositories/rechargeRepository.js";
 
 const cardUtils = {
   generateCardNumber: () => {
@@ -62,6 +64,18 @@ const cardUtils = {
         message: "⚠ Invalid security code (CVV)!",
       };
     }
+  },
+
+  getCardBalance: (transactions: PaymentWithBusinessName[], recharges: Recharge[]) => {
+    const payments = transactions.reduce((acc, transaction) => {
+      return acc + transaction.amount;
+    }, 0);
+
+    const incomes = recharges.reduce((acc, recharge) => {
+      return acc + recharge.amount;
+    }, 0);
+
+    return payments - incomes;
   },
 };
 
