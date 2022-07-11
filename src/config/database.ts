@@ -13,6 +13,7 @@ const connection = new Pool({
 });
 
 connection.on("error", (err, client) => {
+  console.error(err);
   throw {
     name: "dbConnection",
     message: err.message,
