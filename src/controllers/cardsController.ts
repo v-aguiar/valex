@@ -27,3 +27,19 @@ export async function getStatement(req: Request, res: Response) {
 
   res.send(statement);
 }
+
+export async function blockCard(req: Request, res: Response) {
+  const { cardId, password } = req.body;
+
+  await cardServices.blockCard(cardId, password);
+
+  res.sendStatus(200);
+}
+
+export async function unblockCard(req: Request, res: Response) {
+  const { cardId, password } = req.body;
+
+  await cardServices.unblockCard(cardId, password);
+
+  res.sendStatus(200);
+}

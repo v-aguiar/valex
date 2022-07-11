@@ -101,6 +101,58 @@ const cardServices = {
     };
     return statement;
   },
+
+  blockCard: async (cardId: number, password: string) => {
+    const card: cardRepository.Card = await cardRepository.findById(cardId);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given ID!",
+      };
+    }
+
+    if (card.isBlocked) {
+      throw {
+        name: "badRequest",
+        message: "⚠ This card is already blocked!",
+      };
+    }
+
+    cardUtils.checkCardExpiration(card);
+    cardUtils.checkPassword(password, card.password);
+
+    const blockCardData = {
+      isBlocked: true,
+    };
+
+    await cardRepository.update(cardId, blockCardData);
+  },
+
+  unblockCard: async (cardId: number, password: string) => {
+    const card: cardRepository.Card = await cardRepository.findById(cardId);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given ID!",
+      };
+    }
+
+    if (!card.isBlocked) {
+      throw {
+        name: "badRequest",
+        message: "⚠ This card is already unblocked!",
+      };
+    }
+
+    cardUtils.checkCardExpiration(card);
+    cardUtils.checkPassword(password, card.password);
+
+    const unblockCardData = {
+      isBlocked: false,
+    };
+
+    await cardRepository.update(cardId, unblockCardData);
+  },
 };
 
 export default cardServices;
