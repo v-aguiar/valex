@@ -31,6 +31,11 @@ export default function errorHandlerMiddleware(
     res.status(400).send(error.message);
   }
 
+  if (error.name === "dbConnection") {
+    console.error({ error: error.message });
+    res.status(500).send(error.message);
+  }
+
   console.error(error);
   res.status(500).send(error.message);
 }
