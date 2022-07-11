@@ -1,6 +1,6 @@
 ﻿import { Router } from "express";
 
-import { activate, blockCard, unblockCard, create, getStatement } from "../controllers/cardsController.js";
+import { activate, blockCard, unblockCard, create } from "../controllers/cardsController.js";
 
 import apiKeyValidator from "../middlewares/apiKeyValidator.js";
 import bodySchemaValidator from "../middlewares/bodySchemaValidator.js";
@@ -16,7 +16,5 @@ cardsRouter.post("/cards/create", apiKeyValidator, bodySchemaValidator(createCar
 cardsRouter.put("/cards/activate", bodySchemaValidator(activateCardSchema), activate);
 cardsRouter.put("/cards/block", bodySchemaValidator(blockCardSchema), blockCard);
 cardsRouter.put("/cards/unblock", bodySchemaValidator(blockCardSchema), unblockCard);
-
-cardsRouter.get("/cards/statement/:cardId", getStatement);
 
 export default cardsRouter;
