@@ -11,10 +11,10 @@ import createCardSchema from "../schemas/createCardSchema.js";
 
 const cardsRouter = Router();
 
-cardsRouter.post("/cards/create", apiKeyValidator, bodySchemaValidator(createCardSchema), create);
+cardsRouter.post("/create", apiKeyValidator, bodySchemaValidator(createCardSchema), create);
 
-cardsRouter.put("/cards/activate", bodySchemaValidator(activateCardSchema), activate);
-cardsRouter.put("/cards/block", bodySchemaValidator(blockCardSchema), blockCard);
-cardsRouter.put("/cards/unblock", bodySchemaValidator(blockCardSchema), unblockCard);
+cardsRouter.put("/activate", bodySchemaValidator(activateCardSchema), activate);
+cardsRouter.put("/block", bodySchemaValidator(blockCardSchema), blockCard);
+cardsRouter.put("/unblock", bodySchemaValidator(blockCardSchema), unblockCard);
 
 export default cardsRouter;
