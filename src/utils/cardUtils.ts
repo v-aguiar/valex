@@ -66,6 +66,16 @@ const cardUtils = {
     }
   },
 
+  checkPassword: (password: string, hashedPassword: string) => {
+    const decrypted = cryptr.decrypt(hashedPassword);
+    if (password !== decrypted) {
+      throw {
+        name: "unauthorized",
+        message: "⚠ Invalid password!",
+      };
+    }
+  },
+
   getCardBalance: (transactions: PaymentWithBusinessName[], recharges: Recharge[]) => {
     const payments = transactions.reduce((acc, transaction) => {
       return acc + transaction.amount;
