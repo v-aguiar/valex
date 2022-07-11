@@ -85,7 +85,7 @@ const cardUtils = {
       return acc + recharge.amount;
     }, 0);
 
-    return payments - incomes;
+    return incomes - payments;
   },
 };
 
