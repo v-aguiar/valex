@@ -8,8 +8,10 @@ import { PaymentWithBusinessName } from "../repositories/paymentRepository.js";
 import { Recharge } from "../repositories/rechargeRepository.js";
 
 const cardUtils = {
-  generateCardNumber: () => {
-    return faker.finance.creditCardNumber("################");
+  generateCardNumber: ({ isVirtual = false }) => {
+    return isVirtual
+      ? faker.finance.creditCardNumber("mastercard")
+      : faker.finance.creditCardNumber("################");
   },
 
   generateCardCVV: () => {

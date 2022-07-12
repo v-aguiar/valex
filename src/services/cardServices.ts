@@ -7,11 +7,15 @@ import { TransactionTypes, CardInsertData } from "../repositories/cardRepository
 
 import cardUtils from "../utils/cardUtils.js";
 
-interface CreateCardReturn {
+export interface CreateCardReturn {
   cardId: number;
   cardNumber: string;
   securityCode: number;
   expirationDate: string;
+}
+
+export interface InsertDatabaseResponse {
+  id: number;
 }
 
 const cardServices = {
@@ -33,7 +37,7 @@ const cardServices = {
     }
 
     const cardholderName = cardUtils.generateCardholderName(employee.fullName);
-    const cardNumber = cardUtils.generateCardNumber();
+    const cardNumber = cardUtils.generateCardNumber({ isVirtual: false });
     const { databaseCvv: securityCode, cvv } = cardUtils.generateCardCVV();
     const expirationDate = cardUtils.generateExpirationDate();
 
@@ -49,11 +53,54 @@ const cardServices = {
     };
 
     const insertResponse = await cardRepository.insert(newCardData);
-    const { id: cardId } = insertResponse.rows[0];
-
-    cardRepository.update(cardId, { originalCardId: cardId });
+    const { id: cardId }: InsertDatabaseResponse = insertResponse.rows[0];
 
     return { cardId, cardNumber, expirationDate, securityCode: Number(cvv) };
+  },
+
+  createVirtualCard: async (cardId: number, password: string): Promise<CreateCardReturn> => {
+    const card = await cardRepository.findById(cardId);
+    if (!card) {
+      throw {
+        name: "notFound",
+        message: "⚠ No card found with given id...",
+      };
+    }
+
+    if (card.isVirtual) {
+      throw {
+        name: "alreadyExists",
+        message: "⚠ This card is already virtual...",
+      };
+    }
+
+    cardUtils.checkPassword(password, card.password);
+    const virtualPassword = cardUtils.hashPassword(password);
+    const { cvv, databaseCvv } = cardUtils.generateCardCVV();
+    const virtualNumber = cardUtils.generateCardNumber({ isVirtual: true });
+    const virtualExpirationDate = cardUtils.generateExpirationDate();
+
+    const virtualCardData: CardInsertData = {
+      employeeId: card.employeeId,
+      cardholderName: card.cardholderName,
+      securityCode: databaseCvv,
+      password: virtualPassword,
+      expirationDate: virtualExpirationDate,
+      isVirtual: true,
+      isBlocked: true,
+      number: virtualNumber,
+      type: card.type,
+    };
+
+    const insertResponse = await cardRepository.insert(virtualCardData);
+    const { id: virtualCardId }: InsertDatabaseResponse = insertResponse.rows[0];
+
+    return {
+      cardId: virtualCardId,
+      cardNumber: virtualNumber,
+      expirationDate: virtualExpirationDate,
+      securityCode: Number(cvv),
+    };
   },
 
   activateCard: async (cardId: number, password: string, securityCode: number) => {
