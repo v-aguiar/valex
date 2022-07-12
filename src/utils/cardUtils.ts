@@ -58,8 +58,6 @@ const cardUtils = {
   },
 
   checkSecurityCode: (securityCode: number, hashedSecurityCode: string) => {
-    console.log("securityCode", securityCode);
-    console.log("hashedSecurityCode", hashedSecurityCode);
     if (securityCode.toString() !== cryptr.decrypt(hashedSecurityCode)) {
       throw {
         name: "unauthorized",
