@@ -68,8 +68,6 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - `baseURL: https://valex-db-api.herokuapp.com/`
 
-#
-
 ## **Endpoints details**
 
 - '/create' --> Methods: POST
@@ -115,7 +113,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - In order to activate a card, the cardId, the securityCode and the card password must be provided via body:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "securityCode": number,
@@ -138,7 +136,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - In order to block a card, the cardId and the card password must be provided via body:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "password": string
@@ -159,7 +157,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - In order to unblock a card, the cardId and the card password must be provided via body:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "password": string
@@ -187,7 +185,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - A body with the cardId and the amount to be recharged must be provided:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "amount": number
