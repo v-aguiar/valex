@@ -1,4 +1,5 @@
 import { connection } from "../config/database.js";
+import { InsertDatabaseResponse } from "../services/cardServices.js";
 import { mapObjectToUpdateQuery } from "../utils/sqlUtils.js";
 
 export type TransactionTypes = "groceries" | "restaurant" | "transport" | "education" | "health";
@@ -66,7 +67,7 @@ export async function insert(cardData: CardInsertData) {
     type,
   } = cardData;
 
-  return await connection.query(
+  return await connection.query<InsertDatabaseResponse>(
     `
     INSERT INTO cards ("employeeId", number, "cardholderName", "securityCode",
       "expirationDate", password, "isVirtual", "originalCardId", "isBlocked", type)

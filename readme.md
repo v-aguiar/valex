@@ -307,3 +307,35 @@ You can also use all the endpoints from this project through the deployed Heroku
 - `expirationDate`: must be a string with the format 'MM/YY'
 
 #
+
+### **`Method: POST, Route: '/create/virtual'`**
+
+> It is possible to create a virtual card that refers to a real card.
+
+- In order to create a virtual card, the original cardId and password must be provided via body:
+
+  ```typescript
+    {
+      "cardId": number,
+      "password": string
+    }
+  ```
+
+`-> CREATE VIRTUAL VALIDATION:`
+
+- `all`: required
+- `cardId`: must belong to a registered, active card that is not virtual
+- `password`: must be a 4 numbers long string
+
+- This endpoint will return a 201 status code and an object with the new card data:
+
+```typescript
+{
+  cardId: number,
+  cardNumber: string;
+  securityCode: number;
+  expirationDate: string;
+}
+```
+
+#
