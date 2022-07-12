@@ -68,8 +68,6 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - `baseURL: https://valex-db-api.herokuapp.com/`
 
-#
-
 ## **Endpoints details**
 
 - '/create' --> Methods: POST
@@ -94,18 +92,28 @@ You can also use all the endpoints from this project through the deployed Heroku
 - A body with the employeeId and the cardType must be provided:
 
 ```typescript
-    {
-      "employeeId": number,
-      "cardType": "<cardType>"
-    }
+{
+  "employeeId": number,
+  "cardType": "<cardType>"
+}
 ```
 
 `-> CREATE VALIDATION:`
 
-- `all: required`
-- `apiKey: must belong to a registered company`
-- `employeeId: must belong to a registered employee`
-- `cardType: must be one of the following types: `groceries`, `health`, `transport`, `education`, `restaurant`
+- `all`: required
+- `apiKey`: must belong to a registered company
+- `employeeId`: must belong to a registered employee
+- `cardType`: must be one of the following types: ``groceries`, `health`, `transport`, `education`, `restaurant`
+
+- This endpoint will return a 201 status code and an object with the new card data:
+
+```typescript
+{
+  cardNumber: string;
+  securityCode: number;
+  expirationDate: string;
+}
+```
 
 #
 
@@ -115,7 +123,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - In order to activate a card, the cardId, the securityCode and the card password must be provided via body:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "securityCode": number,
@@ -125,10 +133,10 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 `-> ACTIVATE VALIDATION:`
 
-- `all: required`
-- `cardId: must belong to a registered, unnactive card (with no registered password)`
-- `password: must be a 4 numbers long integer`
-- `securityCode(CVV): must be a string of the hashed securityCode`
+- `all`: required
+- `cardId`: must belong to a registered, unnactive card (with no registered password)
+- `password`: must be a 4 numbers long integer
+- `securityCode(CVV)`: must be a 3 numbers long integer
 
 #
 
@@ -138,7 +146,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - In order to block a card, the cardId and the card password must be provided via body:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "password": string
@@ -147,9 +155,9 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 `-> BLOCK VALIDATION:`
 
-- `all: required`
-- `cardId: must belong to a registered, active card`
-- `password: must be a 4 numbers long integer`
+- `all`: required
+- `cardId`: must belong to a registered, active card
+- `password`: must be a 4 numbers long integer
 
 #
 
@@ -159,7 +167,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - In order to unblock a card, the cardId and the card password must be provided via body:
 
-  ```json
+  ```typescript
     {
       "cardId": number,
       "password": string
@@ -168,9 +176,9 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 `-> UNBLOCK VALIDATION:`
 
-- `all: required`
-- `cardId: must belong to a registered, blocked card`
-- `password: must be a 4 numbers long integer`
+- `all`: required
+- `cardId`: must belong to a registered, blocked card
+- `password`: must be a 4 numbers long integer
 
 #
 
@@ -187,18 +195,18 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - A body with the cardId and the amount to be recharged must be provided:
 
-  ```json
-    {
-      "cardId": number,
-      "amount": number
-    }
-  ```
+```typescript
+  {
+    "cardId": number,
+    "amount": number
+  }
+```
 
 `-> RECHARGE VALIDATION:`
 
-- `all: required`
-- `cardId: must belong to a registered, active card`
-- `amount: must be a integer that represents the amount to be recharged, but without the cents. (For example, if the amount is $ 10.50, the amount must be 1050)`
+- `all`: required
+- `cardId`: must belong to a registered, active card
+- `amount`: must be a integer that represents the amount to be recharged, but without the cents. (For example, if the amount is $ 10.50, the amount must be 1050)
 
 #
 
@@ -219,11 +227,11 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 `-> BUY VALIDATION:`
 
-- `all: required`
-- `cardId: must belong to a registered, active card`
-- `businessId: must belong to a registered, kind of business`
-- `amount: must be a integer that represents the amount to be recharged, but without the cents. (For example, if the amount is $ 10.50, the amount must be 1050)`
-- `password: must be a 4 numbers long integer`
+- `all`: required
+- `cardId`: must belong to a registered, active card
+- `businessId`: must belong to a registered, kind of business
+- `amount`: must be a integer that represents the amount to be recharged, but without the cents. (For example, if the amount is $ 10.50, the amount must be 1050)
+- `password`: must be a 4 numbers long integer
 
 #
 
@@ -239,8 +247,8 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 `-> STATEMENTS VALIDATION:`
 
-- `all: required`
-- `cardId: must belong to a registered card`
+- `all`: required
+- `cardId`: must belong to a registered card
 
 `-> STATEMENTS RESPONSE:`
 

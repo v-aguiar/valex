@@ -3,12 +3,18 @@ import * as cardRepository from "../repositories/cardRepository.js";
 import * as paymentRepository from "../repositories/paymentRepository.js";
 import * as rechargeRepository from "../repositories/rechargeRepository.js";
 
-import { TransactionTypes } from "../repositories/cardRepository.js";
+import { TransactionTypes, CardInsertData } from "../repositories/cardRepository.js";
 
 import cardUtils from "../utils/cardUtils.js";
 
+interface CreateCardReturn {
+  cardNumber: string;
+  securityCode: number;
+  expirationDate: string;
+}
+
 const cardServices = {
-  createCard: async (employeeId: number, cardType: TransactionTypes) => {
+  createCard: async (employeeId: number, cardType: TransactionTypes): Promise<CreateCardReturn> => {
     const employee = await employeeRepository.findById(employeeId);
     if (!employee) {
       throw {
@@ -30,7 +36,7 @@ const cardServices = {
     const securityCode = cardUtils.generateCardCVV();
     const expirationDate = cardUtils.generateExpirationDate();
 
-    const newCardData = {
+    const newCardData: CardInsertData = {
       employeeId,
       cardholderName,
       securityCode,
@@ -42,9 +48,13 @@ const cardServices = {
     };
 
     await cardRepository.insert(newCardData);
+
+    const cvv = parseInt(securityCode);
+
+    return { cardNumber, expirationDate, securityCode: cvv };
   },
 
-  activateCard: async (cardId: number, password: string, securityCode: string) => {
+  activateCard: async (cardId: number, password: string, securityCode: number) => {
     const card: cardRepository.Card = await cardRepository.findById(cardId);
     if (!card) {
       throw {

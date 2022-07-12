@@ -5,9 +5,9 @@ import cardServices from "../services/cardServices.js";
 export async function create(req: Request, res: Response) {
   const { employeeId, cardType } = req.body;
 
-  await cardServices.createCard(employeeId, cardType);
+  const newCardData = await cardServices.createCard(employeeId, cardType);
 
-  res.sendStatus(200);
+  res.status(201).send(newCardData);
 }
 
 export async function activate(req: Request, res: Response) {

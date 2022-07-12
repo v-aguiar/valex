@@ -57,8 +57,8 @@ const cardUtils = {
     }
   },
 
-  checkSecurityCode: (securityCode: string, hashedSecurityCode: string) => {
-    if (cryptr.decrypt(securityCode) !== cryptr.decrypt(hashedSecurityCode)) {
+  checkSecurityCode: (securityCode: number, hashedSecurityCode: string) => {
+    if (cryptr.encrypt(securityCode.toString()) !== hashedSecurityCode) {
       throw {
         name: "unauthorized",
         message: "⚠ Invalid security code (CVV)!",
