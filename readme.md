@@ -278,3 +278,32 @@ You can also use all the endpoints from this project through the deployed Heroku
 ```
 
 #
+
+### **`Method: POST, Route: '/buy/online'`**
+
+> An employee can buy from an online source.
+
+- In order to buy online, the businessId, amount of the purchase, card number, cardholder name, security code (CVV) and expiration date must be provided via body:
+
+  ```typescript
+    {
+      "businessId": number,
+      "amount": number,
+      "cardNumber": string,
+      "cardholderName": string,
+      "securityCode": number,
+      "expirationDate": string
+    }
+  ```
+
+`-> BUY ONLINE VALIDATION:`
+
+- `all`: required
+- `businessId`: must belong to a registered, kind of business
+- `amount`: must be a integer that represents the purchase value, but without the cents. (For example, if the amount is $ 10.50, the amount must be 1050)
+- `cardNumber`: must be a 16 numbers long string
+- `cardholderName`: must be an uppercase string, just as the name on the card
+- `securityCode(CVV)`: must be a 3 numbers long integer
+- `expirationDate`: must be a string with the format 'MM/YY'
+
+#
