@@ -109,6 +109,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 ```typescript
 {
+  cardId: number,
   cardNumber: string;
   securityCode: number;
   expirationDate: string;
@@ -135,7 +136,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - `all`: required
 - `cardId`: must belong to a registered, unnactive card (with no registered password)
-- `password`: must be a 4 numbers long integer
+- `password`: must be a 4 numbers long string
 - `securityCode(CVV)`: must be a 3 numbers long integer
 
 #
@@ -157,7 +158,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - `all`: required
 - `cardId`: must belong to a registered, active card
-- `password`: must be a 4 numbers long integer
+- `password`: must be a 4 numbers long string
 
 #
 
@@ -178,7 +179,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - `all`: required
 - `cardId`: must belong to a registered, blocked card
-- `password`: must be a 4 numbers long integer
+- `password`: must be a 4 numbers long string
 
 #
 
@@ -231,7 +232,7 @@ You can also use all the endpoints from this project through the deployed Heroku
 - `cardId`: must belong to a registered, active card
 - `businessId`: must belong to a registered, kind of business
 - `amount`: must be a integer that represents the amount to be recharged, but without the cents. (For example, if the amount is $ 10.50, the amount must be 1050)
-- `password`: must be a 4 numbers long integer
+- `password`: must be a 4 numbers long string
 
 #
 

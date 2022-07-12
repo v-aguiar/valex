@@ -14,7 +14,7 @@ const cardUtils = {
 
   generateCardCVV: () => {
     const cvv = faker.finance.creditCardCVV();
-    return cryptr.encrypt(cvv);
+    return { databaseCvv: cryptr.encrypt(cvv), cvv };
   },
 
   hashPassword: (password: string) => {
@@ -58,7 +58,9 @@ const cardUtils = {
   },
 
   checkSecurityCode: (securityCode: number, hashedSecurityCode: string) => {
-    if (cryptr.encrypt(securityCode.toString()) !== hashedSecurityCode) {
+    console.log("securityCode", securityCode);
+    console.log("hashedSecurityCode", hashedSecurityCode);
+    if (securityCode.toString() !== cryptr.decrypt(hashedSecurityCode)) {
       throw {
         name: "unauthorized",
         message: "⚠ Invalid security code (CVV)!",

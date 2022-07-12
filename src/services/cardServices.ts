@@ -8,6 +8,7 @@ import { TransactionTypes, CardInsertData } from "../repositories/cardRepository
 import cardUtils from "../utils/cardUtils.js";
 
 interface CreateCardReturn {
+  cardId: number;
   cardNumber: string;
   securityCode: number;
   expirationDate: string;
@@ -33,7 +34,7 @@ const cardServices = {
 
     const cardholderName = cardUtils.generateCardholderName(employee.fullName);
     const cardNumber = cardUtils.generateCardNumber();
-    const securityCode = cardUtils.generateCardCVV();
+    const { databaseCvv: securityCode, cvv } = cardUtils.generateCardCVV();
     const expirationDate = cardUtils.generateExpirationDate();
 
     const newCardData: CardInsertData = {
@@ -47,11 +48,12 @@ const cardServices = {
       type: cardType,
     };
 
-    await cardRepository.insert(newCardData);
+    const insertResponse = await cardRepository.insert(newCardData);
+    const { id: cardId } = insertResponse.rows[0];
 
-    const cvv = parseInt(securityCode);
+    cardRepository.update(cardId, { originalCardId: cardId });
 
-    return { cardNumber, expirationDate, securityCode: cvv };
+    return { cardId, cardNumber, expirationDate, securityCode: Number(cvv) };
   },
 
   activateCard: async (cardId: number, password: string, securityCode: number) => {
@@ -78,7 +80,6 @@ const cardServices = {
     const activateCardData = {
       isBlocked: false,
       password: hashedPassword,
-      originalCardId: cardId,
     };
 
     await cardRepository.update(cardId, activateCardData);

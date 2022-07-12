@@ -6,12 +6,15 @@ const activateCardSchema = Joi.object({
     "number.base": "⚠ securityCode must be a number",
   }),
 
-  password: Joi.number().min(4).max(4).required().messages({
-    "number.min": "⚠ password must be 4 digits",
-    "number.max": "⚠ password must be 4 digits",
-    "number.required": "⚠ password is required",
-    "number.base": "⚠ password must be a number",
-  }),
+  password: Joi.string()
+    .length(4)
+    .regex(/^[0-9]*$/)
+    .required()
+    .messages({
+      "string.length": "⚠ Password must be 4 digits long",
+      "string.regex": "⚠ Password must contain only numbers",
+      "string.required": "⚠ Password is required",
+    }),
 
   cardId: Joi.number().required().messages({
     "number.required": "⚠ cardId is required",
