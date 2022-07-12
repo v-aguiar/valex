@@ -195,12 +195,12 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 - A body with the cardId and the amount to be recharged must be provided:
 
-```typescript
-  {
-    "cardId": number,
-    "amount": number
-  }
-```
+  ```typescript
+    {
+      "cardId": number,
+      "amount": number
+    }
+  ```
 
 `-> RECHARGE VALIDATION:`
 
