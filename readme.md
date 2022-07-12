@@ -331,10 +331,10 @@ You can also use all the endpoints from this project through the deployed Heroku
 
 ```typescript
 {
-  cardId: number,
-  cardNumber: string;
-  securityCode: number;
-  expirationDate: string;
+  "cardId": number,
+  "cardNumber": string;
+  "securityCode": number;
+  "expirationDate": string;
 }
 ```
 

@@ -1,1 +1,185 @@
-{"client":"Thunder Client","collectionName":"valex-api","dateExported":"2022-07-12T19:48:27.056Z","version":"1.1","folders":[],"requests":[{"_id":"cb575737-94be-47ee-83a5-2e087b3b87fc","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Create Card - POST","url":"localhost:5000/create","method":"POST","sortNum":10000,"created":"2022-07-12T16:22:56.727Z","modified":"2022-07-12T18:03:51.750Z","headers":[{"name":"x-api-key","value":"zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0"}],"params":[],"body":{"type":"json","raw":"{\n    \"employeeId\": 2,\n    \"cardType\": \"health\"\n}","form":[]},"tests":[]},{"_id":"ab543869-7d76-479d-bf67-9e418344dbfc","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Activate Card - PUT","url":"localhost:5000/activate","method":"PUT","sortNum":15000,"created":"2022-07-12T17:26:24.852Z","modified":"2022-07-12T18:46:06.687Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n    \"cardId\": 8,\n    \"securityCode\": 662,\n    \"password\": \"5678\"\n}","form":[]},"tests":[]},{"_id":"e1d50154-bb93-4e08-95cd-2a4df1872a7b","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Recharge Card - POST","url":"localhost:5000/recharge","method":"POST","sortNum":20000,"created":"2022-07-12T16:24:45.485Z","modified":"2022-07-12T18:45:11.801Z","headers":[{"name":"x-api-key","value":"zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0"}],"params":[],"body":{"type":"json","raw":"{\n    \"cardId\": 8,\n    \"amount\": 500000\n}","form":[]},"tests":[]},{"_id":"27f0d1ad-7382-49bc-900c-f4f0d5613e52","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Buy on Points of Sale  - POST","url":"localhost:5000/buy","method":"POST","sortNum":21250,"created":"2022-07-12T16:32:52.635Z","modified":"2022-07-12T17:57:21.830Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n    \"cardId\": 4,\n    \"businessId\": 2,\n    \"amount\": 5000,\n    \"password\": \"5678\"\n}","form":[]},"tests":[]},{"_id":"9caa231e-d9f0-40fa-ba5d-cd5abed62cbb","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Buy Online - POST","url":"localhost:5000/buy/online","method":"POST","sortNum":21875,"created":"2022-07-12T18:42:35.866Z","modified":"2022-07-12T18:49:39.570Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n    \"cardNumber\": \"8366502958869524\",\n    \"businessId\": 5,\n    \"amount\": 5000,\n    \"expirationDate\": \"07/27\",\n    \"cardholderName\": \"CICLANA M MADEIRA\",\n    \"securityCode\": 662\n}","form":[]},"tests":[]},{"_id":"505b86ed-1982-4631-abb5-2b17477d2fe8","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Get Card Statement - GET ","url":"localhost:5000/statement/8","method":"GET","sortNum":22500,"created":"2022-07-12T16:27:29.632Z","modified":"2022-07-12T18:49:49.280Z","headers":[],"params":[],"tests":[]},{"_id":"d755f41a-32d9-45a8-8a03-8b3bbd02d771","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Block Card - PUT","url":"localhost:5000/block","method":"PUT","sortNum":25000,"created":"2022-07-12T16:28:10.268Z","modified":"2022-07-12T17:57:58.344Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n    \"cardId\": 4,\n    \"password\": \"5678\"\n}","form":[]},"tests":[]},{"_id":"a8927114-a16d-4a67-a06a-b84f99ad2a41","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Unblock Card - PUT","url":"localhost:5000/unblock","method":"PUT","sortNum":30000,"created":"2022-07-12T16:26:38.341Z","modified":"2022-07-12T17:58:08.656Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n    \"cardId\": 4,\n    \"password\": \"5678\"\n}","form":[]},"tests":[]},{"_id":"96d27ae9-1bbb-4764-a145-2924a555a39c","colId":"86629ff8-7eb0-49f1-a907-972b3a432c1d","containerId":"","name":"Create Virtual Card - POST","url":"localhost:5000/create/virtual","method":"POST","sortNum":60000,"created":"2022-07-12T19:46:16.663Z","modified":"2022-07-12T19:48:08.955Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n    \"cardId\": 9,\n    \"password\": \"5678\"\n}","form":[]},"tests":[]}]}
+{
+  "client": "Thunder Client",
+  "collectionName": "valex-api",
+  "dateExported": "2022-07-12T19:48:27.056Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "_id": "cb575737-94be-47ee-83a5-2e087b3b87fc",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Create Card - POST",
+      "url": "localhost:5000/create",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2022-07-12T16:22:56.727Z",
+      "modified": "2022-07-12T18:03:51.750Z",
+      "headers": [
+        {
+          "name": "x-api-key",
+          "value": "zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"employeeId\": 2,\n    \"cardType\": \"health\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "ab543869-7d76-479d-bf67-9e418344dbfc",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Activate Card - PUT",
+      "url": "localhost:5000/activate",
+      "method": "PUT",
+      "sortNum": 15000,
+      "created": "2022-07-12T17:26:24.852Z",
+      "modified": "2022-07-12T18:46:06.687Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardId\": 8,\n    \"securityCode\": 662,\n    \"password\": \"5678\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "e1d50154-bb93-4e08-95cd-2a4df1872a7b",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Recharge Card - POST",
+      "url": "localhost:5000/recharge",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2022-07-12T16:24:45.485Z",
+      "modified": "2022-07-12T18:45:11.801Z",
+      "headers": [
+        {
+          "name": "x-api-key",
+          "value": "zadKLNx.DzvOVjQH01TumGl2urPjPQSxUbf67vs0"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardId\": 8,\n    \"amount\": 500000\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "27f0d1ad-7382-49bc-900c-f4f0d5613e52",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Buy on Points of Sale  - POST",
+      "url": "localhost:5000/buy",
+      "method": "POST",
+      "sortNum": 21250,
+      "created": "2022-07-12T16:32:52.635Z",
+      "modified": "2022-07-12T17:57:21.830Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardId\": 4,\n    \"businessId\": 2,\n    \"amount\": 5000,\n    \"password\": \"5678\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "9caa231e-d9f0-40fa-ba5d-cd5abed62cbb",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Buy Online - POST",
+      "url": "localhost:5000/buy/online",
+      "method": "POST",
+      "sortNum": 21875,
+      "created": "2022-07-12T18:42:35.866Z",
+      "modified": "2022-07-12T18:49:39.570Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardNumber\": \"8366502958869524\",\n    \"businessId\": 5,\n    \"amount\": 5000,\n    \"expirationDate\": \"07/27\",\n    \"cardholderName\": \"CICLANA M MADEIRA\",\n    \"securityCode\": 662\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "505b86ed-1982-4631-abb5-2b17477d2fe8",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Get Card Statement - GET ",
+      "url": "localhost:5000/statement/8",
+      "method": "GET",
+      "sortNum": 22500,
+      "created": "2022-07-12T16:27:29.632Z",
+      "modified": "2022-07-12T18:49:49.280Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "d755f41a-32d9-45a8-8a03-8b3bbd02d771",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Block Card - PUT",
+      "url": "localhost:5000/block",
+      "method": "PUT",
+      "sortNum": 25000,
+      "created": "2022-07-12T16:28:10.268Z",
+      "modified": "2022-07-12T17:57:58.344Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardId\": 4,\n    \"password\": \"5678\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "a8927114-a16d-4a67-a06a-b84f99ad2a41",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Unblock Card - PUT",
+      "url": "localhost:5000/unblock",
+      "method": "PUT",
+      "sortNum": 30000,
+      "created": "2022-07-12T16:26:38.341Z",
+      "modified": "2022-07-12T17:58:08.656Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardId\": 4,\n    \"password\": \"5678\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "96d27ae9-1bbb-4764-a145-2924a555a39c",
+      "colId": "86629ff8-7eb0-49f1-a907-972b3a432c1d",
+      "containerId": "",
+      "name": "Create Virtual Card - POST",
+      "url": "localhost:5000/create/virtual",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2022-07-12T19:46:16.663Z",
+      "modified": "2022-07-12T19:48:08.955Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"cardId\": 9,\n    \"password\": \"5678\"\n}",
+        "form": []
+      },
+      "tests": []
+    }
+  ]
+}
